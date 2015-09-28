@@ -1,0 +1,23 @@
+Принудительно поставим 100baseTX и full-duplex на сетевой карте с именем em0:
+
+/sbin/ifconfig em0 media 100baseTX mediaopt full-duplex
+
+Посмотрим что получилось:
+
+/sbin/ifconfig em0
+em0: flags=8843<UP,BROADCAST,RUNNING,SIMPLEX,MULTICAST> metric 0 mtu 1500
+options=9b<RXCSUM,TXCSUM,VLAN_MTU,VLAN_HWTAGGING,VLAN_HWCSUM>
+ether 00:02:a5:4e:92:48
+inet 172.16.10.14 netmask 0xffffff00 broadcast 172.16.10.255
+media:  Ethernet 100baseTX <full-duplex>
+status: active
+
+Видим, что теперь жестко выставлено 100baseTX и full-duplex.
+
+В случае с гигабитными линками команда ессно та же, но скорость другая:
+
+/sbin/ifconfig em0 media 1000baseTX mediaopt full-duplex
+
+Для того, чтобы после ребута выставленная руками скорость и дуплекс оставались, необходимо внести это в /etc/rc.conf:
+
+ifconfig_em0=»inet 172.16.10.14 netmask 255.255.255.0 media 100baseTX mediaopt full-duplex»

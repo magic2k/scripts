@@ -1,0 +1,1 @@
+#zcat <dump_name>.sql.gz | mysql -uroot -p <base_name>

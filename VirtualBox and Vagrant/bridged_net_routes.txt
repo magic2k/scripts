@@ -1,0 +1,9 @@
+для   config.vm.network "public_network", ip: "172.18.68.40", bridge: 'p1p1'
+      config.ssh.forward_agent = true
+
+ip r del default
+ip r add default via 172.18.68.50
+
+>>> /etc/rc.local 
+
+ ip route add 192.168.20.0/24 via 192.168.16.254 ?

@@ -1,0 +1,16 @@
+Например хотим получить базу pirates_const из полного бэкапа.
+
+сначала находим где в дампе находится база грепая по Current Database:
+
+faor:/home/george_a# grep -n 'Current Database' mysql_2012-10-09
+19:-- Current Database: `mysql`
+672:-- Current Database: `pirates_admin`
+5063:-- Current Database: `pirates_const`
+8849:-- Current Database: `pirates_logs`
+ 
+
+Зная первую и последнюю строки базы пишем ее в отдельный файл
+
+faor:/home/george_a# sed -n 5063,8849p mysql_2012-10-09 > pirates_const.sql
+
+Всио

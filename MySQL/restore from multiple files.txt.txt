@@ -1,0 +1,1 @@
+find . -name '*.sql' | awk '{ print "source",$0 }' | mysql <DB_NAME> --batch

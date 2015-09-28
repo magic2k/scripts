@@ -1,0 +1,7 @@
+sed -i "s/что/на_что/" <имя файла где>
+
+например
+sed -i "s/-ignore-/-do-/" /etc/my.cnf
+
+http://blog.perlover.com/2009/10/29/sed-regexp/  - регулярные выражения в sed, чем они отличаются
+http://www.gnu.org/software/sed/manual/sed.html

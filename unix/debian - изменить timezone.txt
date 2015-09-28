@@ -1,0 +1,2 @@
+#!/bin/bash
+echo "TZ='Europe/Moscow';export TZ" >> ~/.profile ; echo "TZ='Europe/Moscow';export TZ" >> /etc/profile

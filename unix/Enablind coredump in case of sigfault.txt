@@ -1,0 +1,5 @@
+Чтобы при segfault появлялся coredump в Gentoo надо:
+# echo "1" > /proc/sys/fs/suid_dumpable
+в /etc/profile добавить 
+ulimit -c unlimited > /dev/null 2&>1
+core будут в /var/spool/че-то там или в директории, где находится программа.

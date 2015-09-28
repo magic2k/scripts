@@ -1,0 +1,1 @@
+SELECT * FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = 'jungle_logs' AND TABLE_NAME LIKE 'tourney%' AND COLUMN_NAME = 'level';

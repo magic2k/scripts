@@ -1,0 +1,15 @@
+List of vms
+VBoxManage list vms
+
+
+List running machines (returns name and UUID):
+VBoxManage list runningvms
+
+Stop running VMs by "hibernating" them (reommended to avoid data loss)
+VBoxManage controlvm <name|uuid> savestate
+
+Poweroff running VMs (not recommended because we may lose data in the guest)
+VBoxManage controlvm <name|uuid> poweroff
+
+Use ACPI in an ACPI-aware guest OS (preferable to poweroff for graceful shutdown of guests)
+VBoxManage controlvm <name|uuid> acpipowerbutton

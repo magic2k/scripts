@@ -1,0 +1,4 @@
+SELECT * INTO OUTFILE 'dfs_items_from_13.csv' FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '"' LINES TERMINATED BY '\n' FROM dfs.dfs_items;
+
+
+файл будет в data_dir (/var/lib/mysql by default)

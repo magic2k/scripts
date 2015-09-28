@@ -1,0 +1,7 @@
+Получаем список таблиц
+
+grep -n "Table structure" mysql3_2012-11-19.sql
+
+Зная номера строк таблицы, выпиливаем таблицу из дампа 
+
+sed -n '[starting_line_number],[ending_line_number] p' [MySQL_dump_filename].sql > [table_output_filename].sql

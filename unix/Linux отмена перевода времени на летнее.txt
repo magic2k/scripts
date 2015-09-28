@@ -1,0 +1,27 @@
+date
+wget http://www.firststeps.ru/europe
+zic europe
+cp /usr/share/zoneinfo/Europe/Moscow /etc/localtime
+rm europe
+date
+
+Теперь все серваки работают нормально. 
+root@muse:~# date
+Пнд Окт 31 09:39:13 MSK 2011
+root@muse:~# wget http://www.firststeps.ru/europe
+--09:39:14--  http://www.firststeps.ru/europe
+           => `europe'
+Connecting to www.firststeps.ru:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 121,172 [application/octet-stream]
+	   
+100%[==================================================================================>] 121,172       --.--K/s
+	   
+09:39:14 (9.81 MB/s) - `europe' saved [121172/121172]
+	   
+root@muse:~# zic europe
+root@muse:~# cp /usr/share/zoneinfo/Europe/Moscow /etc/localtime
+root@muse:~# rm europe
+root@muse:~# date
+Пнд Окт 31 10:39:18 MSK 2011
+root@muse:~#

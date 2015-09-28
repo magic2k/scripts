@@ -1,0 +1,3 @@
+sudo ethtool -s eth0 duplex full speed 100 autoneg off
+
+ethtool -s eth2 duplex full speed 100 autoneg on
