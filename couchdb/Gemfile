@@ -1,2 +1,1 @@
 gem "couchrest"
-gem "json"
