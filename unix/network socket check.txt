@@ -1,0 +1,25 @@
+netstat -ant | grep 80 | awk '{print $6}' | sort | uniq -c | sort -n   - статистика по состояниям сокетов
+
+netstat -ant | grep 80 | wc -l
+
+netstat -ant | grep SYN_RECV | wc -l
+
+
+netstat -n -p | grep SYN_REC| awk '{print $5}'|awk -F: '{print $1}' | sort -n | uniq -c | sort -nr | head -n10 - top10 по запросам SYN
+
+Правило для блокировки а всякий случай:
+iptables -I INPUT -p tcp -s 77.232.10.216 -j REJECT --reject-with tcp-reset
+
+
+cat /proc/sys/net/ipv4/tcp_fin_timeout
+cat /proc/sys/net/ipv4/tcp_syncookies
+
+
+This is an iptables rule you can fast use in case syn_flood attack
+
+iptables -N syn_flood
+iptables -A INPUT -p tcp --syn -j syn_flood
+iptables -A syn_flood -m limit --limit 1/s --limit-burst 3 -j RETURN
+iptables -A syn_flood -j DROP
+
+http://blog.dubbelboer.com/2012/04/09/syn-cookies.html
