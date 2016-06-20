@@ -15,7 +15,8 @@ rescue RestClient::ResourceNotFound => nfe
   doc = db.get('doc')
 end
 
+
 puts doc.inspect
-db.delete_doc(doc)
+#1db.delete_doc(doc)
 
 

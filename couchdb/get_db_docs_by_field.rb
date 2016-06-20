@@ -2,6 +2,8 @@ require 'rubygems'
 require 'couchrest'
 
 key = "node"
+errored_dbs = 0
+
 def get_all_dbs
   CouchRest.get("http://localhost:5984/_all_dbs")
 end
@@ -26,8 +28,14 @@ dbs = get_all_dbs
 
 dbs.each do |db|
   puts '----' + db + '----'
-  docs = get_db_docs(db)
-  puts "\nDB have documents: " + docs["total_rows"].to_s
+  begin
+    docs = get_db_docs(db)
+#    puts "\nDB have documents: " + docs["total_rows"].to_s
+  rescue
+#    puts 'Can\'t open ' + db
+#    errored_dbs++
+    next
+  end
   doc_ids = get_doc_ids docs
 
   docs_with_field = []
@@ -38,10 +46,10 @@ dbs.each do |db|
     end
   end
 
-  puts "\nDocuments contains 'node' field: "
+  puts "\nDocuments and db that contains \'"+ key +"\' field: "
   puts docs_with_field.to_s
 
-  puts "\n-------end of '+db+'------------\n\n\n\n"
+  puts "\n-------end of "+ db +" ------------\n\n\n\n"
 end
 
 
