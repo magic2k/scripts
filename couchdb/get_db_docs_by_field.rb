@@ -44,7 +44,7 @@ dbs.each do |db|
     docs = get_db_docs(db)
 #    puts "\nDB have documents: " + docs["total_rows"].to_s
   rescue => nfe
-    puts 'Can\'t open ' + db + 'reason is: ' + nfe
+    puts 'Can\'t open ' + db + ' reason is: ' + nfe.to_s
     errored_dbs=+1
     next
   end
