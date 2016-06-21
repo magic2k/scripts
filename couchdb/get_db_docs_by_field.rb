@@ -1,7 +1,10 @@
+#First cli parameter is the field in document to search for
+#
+
 require 'rubygems'
 require 'couchrest'
 
-key = "node"
+key = ARGV[0]
 errored_dbs = 0
 
 def get_all_dbs
@@ -36,7 +39,7 @@ dbs = get_all_dbs
 
 dbs.each do |db|
   substitute_unsafe_chars(db)
-  puts '----' + db + '----'
+#  puts '----' + db + '----'
   begin
     docs = get_db_docs(db)
 #    puts "\nDB have documents: " + docs["total_rows"].to_s
@@ -55,10 +58,11 @@ dbs.each do |db|
       docs_with_field << id
     end
   end
-
-  puts "\nDocuments and db that contains \'" + key + "\' field: "
-  puts docs_with_field.to_s
-  puts "\n-------end of " + db + " ------------\n\n\n\n"
+  unless docs_with_field.empty?
+    puts "\nDocuments and db that contains \'" + key + "\' field: "
+    puts docs_with_field.to_s
+    puts "\n-------end of " + db + " ------------\n\n\n\n"
+  end
 end
 
 puts 'errored dbs: ' + errored_dbs.to_s
