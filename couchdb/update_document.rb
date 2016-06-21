@@ -4,7 +4,7 @@ require 'couchrest'
 
 server = CouchRest.new
 #create db if it doesn't already exist
-db = server.database!('test_db')
+db = server.database!('testdb%2Fwith%2Dsymbols')
 
 begin
   doc = db.get('doc')

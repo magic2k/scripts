@@ -22,34 +22,44 @@ end
 
 def get_document(db, doc_id)
   CouchRest.get("http://localhost:5984/#{db}/#{doc_id}")
+# db.get(doc_id)
+end
+
+def substitute_unsafe_chars(string)
+  string.gsub!('/','%2F')
+  string.gsub!('-','%2D')
+#  string.gsub!('.','%2E')
+#  string.gsub!('_','%5F')
 end
 
 dbs = get_all_dbs
 
 dbs.each do |db|
+  substitute_unsafe_chars(db)
   puts '----' + db + '----'
   begin
     docs = get_db_docs(db)
 #    puts "\nDB have documents: " + docs["total_rows"].to_s
   rescue
-#    puts 'Can\'t open ' + db
-#    errored_dbs++
+    puts 'Can\'t open ' + db
+    errored_dbs=+1
     next
   end
   doc_ids = get_doc_ids docs
 
   docs_with_field = []
   doc_ids.each do |id|
+    substitute_unsafe_chars id
     doc = get_document db, id
     if doc.has_key?(key)
       docs_with_field << id
     end
   end
 
-  puts "\nDocuments and db that contains \'"+ key +"\' field: "
+  puts "\nDocuments and db that contains \'" + key + "\' field: "
   puts docs_with_field.to_s
-
-  puts "\n-------end of "+ db +" ------------\n\n\n\n"
+  puts "\n-------end of " + db + " ------------\n\n\n\n"
 end
 
+puts 'errored dbs: ' + errored_dbs.to_s
 
