@@ -56,6 +56,21 @@ dbs.each do |db|
     doc = get_document db, id
     if doc.has_key?(key)
       docs_with_field << id
+    else
+      doc.each_value do |subdoc|
+        if subdoc.respond_to?(:has_key?, true)
+          if subdoc.has_key?(key)
+              docs_with_field << 'subdoc_' + subdoc.to_s
+          end
+          subdoc.each do |subsubdoc|
+            if subdoc.respond_to?(:has_key?, true)
+              if subdoc.has_key?(key)
+                docs_with_field << 'subdoc_' + subdoc.to_s
+              end
+            end
+          end
+        end
+      end
     end
   end
   unless docs_with_field.empty?
